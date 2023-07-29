@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopifyApp", "ShopifyApp\ShopifyApp.csproj", "{8CE4D7D3-49B9-46B4-AD0B-67FFF3AF290E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopifyApp", "ShopifyApp\ShopifyApp.csproj", "{8CE4D7D3-49B9-46B4-AD0B-67FFF3AF290E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{3C127DC2-4CC3-40C4-B9B7-1A8F8095322F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationFactory", "ConfigurationFactory\ConfigurationFactory.csproj", "{DBD4D6FF-9BE1-4E00-A274-D4CE9D42C922}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{8CE4D7D3-49B9-46B4-AD0B-67FFF3AF290E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CE4D7D3-49B9-46B4-AD0B-67FFF3AF290E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CE4D7D3-49B9-46B4-AD0B-67FFF3AF290E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C127DC2-4CC3-40C4-B9B7-1A8F8095322F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C127DC2-4CC3-40C4-B9B7-1A8F8095322F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C127DC2-4CC3-40C4-B9B7-1A8F8095322F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C127DC2-4CC3-40C4-B9B7-1A8F8095322F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBD4D6FF-9BE1-4E00-A274-D4CE9D42C922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD4D6FF-9BE1-4E00-A274-D4CE9D42C922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD4D6FF-9BE1-4E00-A274-D4CE9D42C922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD4D6FF-9BE1-4E00-A274-D4CE9D42C922}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
