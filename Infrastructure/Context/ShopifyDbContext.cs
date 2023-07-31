@@ -1,5 +1,4 @@
-﻿
-namespace ShopifyApp.Database
+﻿namespace Infrastructure.Context
 {
     public class ShopifyDbContext
     {
@@ -7,6 +6,6 @@ namespace ShopifyApp.Database
 
         public string DatabaseName { get; set; } = null!;
 
-        public string ShopifyCollectionName { get; set; } = null!;
+        public string CustomersCollection { get; set; } = null!;
     }
 }

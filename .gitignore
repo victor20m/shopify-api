@@ -8,13 +8,13 @@ project.lock.json
 .vs/
 # Visual Studio Code
 .vscode
-
+.vs/
 # User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
-
+appsettings.json
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

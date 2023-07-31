@@ -15,34 +15,40 @@ public class Program
 
     public async Task Main()
     {
-        string giphySecret = GetEnvironmentKey("giphy", "api_key");
         Console.WriteLine("Script started.");
         try
         {
-            HttpResponseMessage response = await client.GetAsync($"https://api.giphy.com/v1/gifs/trending?api_key={giphySecret}&limit=2");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var responseData = JObject.Parse(responseBody);
-            List<JToken> gifs;
-            if (responseData != null && responseData.GetValue("data") != null)
+            //await SubscibeWebhooks();
+            await CreateProducts();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("\nThe script encountered an error");
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    static async Task CreateProducts()
+    {
+        string giphySecret = GetEnvironmentKey("giphy", "api_key");
+        HttpResponseMessage response = await client.GetAsync($"https://api.giphy.com/v1/gifs/trending?api_key={giphySecret}&limit=2");
+        response.EnsureSuccessStatusCode();
+        string responseBody = await response.Content.ReadAsStringAsync();
+        var responseData = JObject.Parse(responseBody);
+        List<JToken> gifs;
+        if (responseData != null && responseData.GetValue("data") != null)
+        {
+            gifs = responseData.GetValue("data")?.ToList<JToken>();
+            if (gifs?.Count > 0)
             {
-                gifs = responseData.GetValue("data")?.ToList<JToken>();
-                if (gifs?.Count > 0)
-                {
-                    List<Product> products = BuildProducts(gifs);
-                    await CreateShopifyProducts(products);
-                    Console.WriteLine("Products created successfully");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No gifs found");
+                List<Product> products = BuildProducts(gifs);
+                await CreateShopifyProducts(products);
+                Console.WriteLine("Products created successfully");
             }
         }
-        catch (HttpRequestException e)
+        else
         {
-            Console.WriteLine("\nError retrieving gifs");
-            Console.WriteLine(e.Message);
+            throw new Exception("No gifs found");
         }
     }
 
@@ -96,17 +102,44 @@ public class Program
             try
             {
                 var response = await productService.CreateAsync(product);
-                Console.WriteLine(response);
                 newProducts.Add(response);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to create product: {ex.Message}");
+                throw new Exception($"Failed to create product: {ex.Message}");
             }
         }
         return newProducts;
     }
 
+    static async Task SubscibeWebhooks()
+    {
+        string apiKey = GetEnvironmentKey("shopify", "api_secret");
+        string storeUrl = GetEnvironmentKey("shopify", "store_url");
+        string ordersEndpoint = GetEnvironmentKey("api", "orders_endpoint");
+
+        var webbookService = new WebhookService(storeUrl, apiKey);
+        webbookService.SetExecutionPolicy(new LeakyBucketExecutionPolicy());
+        Webhook hook = new Webhook()
+        {
+            Address = ordersEndpoint,
+            CreatedAt = DateTime.Now,
+            Format = "json",
+            Topic = "orders/create"
+        };
+
+        try
+        {
+            hook = await webbookService.CreateAsync(hook);
+            Console.WriteLine($"Successfully subscribed to {hook.Topic} webhook.");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Failed to create webhook subscription {ex.Message}");
+        }
+
+    }
+    
     static string GetEnvironmentKey(string section, string key)
     {
         var builder = new ConfigurationBuilder()
@@ -115,6 +148,7 @@ public class Program
 
         IConfigurationRoot configuration = builder.Build();
         IConfigurationSection envSection = configuration.GetSection(section);
+        if (envSection is null) throw new Exception($"Could not get configuration {section} -> {key}");
         return envSection.GetSection(key).Value;
     }
 }
