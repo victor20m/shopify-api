@@ -18,7 +18,7 @@ public class Program
         Console.WriteLine("Script started.");
         try
         {
-            await SubscibeWebhooks();
+            //await SubscibeWebhooks();
             await CreateProducts();
         }
         catch (Exception ex)

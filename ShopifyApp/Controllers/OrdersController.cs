@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using ShopifyApp.Filters;
 using ShopifySharp;
 
@@ -8,27 +9,29 @@ namespace ShopifyApp.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        // GET: api/<OrdersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IOrderLocalService _orderService;
+
+        public OrdersController(IOrderLocalService orderService)
         {
-            return new string[] { "value1", "value2" };
+            _orderService = orderService;
         }
 
-        // GET api/<OrdersController>/5
-        [HttpGet("{id}")]
-        [ServiceFilter(typeof(WebhookAuthFilter))]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<OrdersController>
         [HttpPost]
         [ServiceFilter(typeof(WebhookAuthFilter))]
-        public async Task<ActionResult<string>> Post([FromBody] Order order)
+        public async Task<ActionResult> Post([FromBody] dynamic request)
         {
-            return "test";
+            string requestText = request.ToString();
+
+            Order order = Newtonsoft.Json.JsonConvert.DeserializeObject<Order>(requestText);
+            if (order is null || order.Customer is null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                await _orderService.Create(order);
+            }
+            return Ok();
         }
     }
 }

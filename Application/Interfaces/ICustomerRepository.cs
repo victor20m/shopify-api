@@ -1,19 +1,14 @@
-﻿using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 
 namespace Application.Interfaces
 {
-    internal interface ICustomerRepository
+    public interface ICustomerRepository
     {
-        public CustomerEntity Get(string customerId);
+        public Task<CustomerEntity> Get(long? customerId);
 
-        public void Create(string customerId);
+        public Task Create(CustomerEntity customer);
 
-        public void Update(CustomerEntity customer);
+        public Task Update(CustomerEntity customer);
 
     }
 }

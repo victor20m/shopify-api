@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
-    <PackageReference Include="shopifysharp" Version="6.2.0" />
+    <PackageReference Include="shopifysharp" Version="6.3.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationFactory\ConfigurationFactory.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
 </Project>

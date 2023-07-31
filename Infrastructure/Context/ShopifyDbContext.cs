@@ -1,4 +1,4 @@
-﻿namespace Repository.Context
+﻿namespace Infrastructure.Context
 {
     public class ShopifyDbContext
     {
@@ -6,7 +6,6 @@
 
         public string DatabaseName { get; set; } = null!;
 
-        public string ShopifyCollectionName { get; set; } = null!;
-
+        public string CustomersCollection { get; set; } = null!;
     }
 }

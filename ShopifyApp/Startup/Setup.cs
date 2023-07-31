@@ -1,19 +1,22 @@
 ﻿using ConfigurationFactory;
 using ShopifyApp.Filters;
+using ShopifySharp.Enums;
+using ShopifySharp;
 
 namespace ShopifyApp.Startup
 {
     public static class Setup
     {
-        public static IServiceCollection SetupServices(IServiceCollection services)
+        public static void SetupServices(IServiceCollection services, IConfiguration configuration)
         {
-            ServiceFactory serviceFactory = new ServiceFactory(services);
+            ServiceFactory serviceFactory = new(services, configuration);
             serviceFactory.ConfigureServices();
-            services.AddRazorPages();
-            services.AddControllers();
+            serviceFactory.ConfigureDbContext();
             services.AddScoped<WebhookAuthFilter>();
+            services.AddRazorPages();
             services.AddSwaggerGen();
-            return services;
+            services.AddControllers(options => options.Filters.Add<ExceptionFilter>())
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
     }
 }

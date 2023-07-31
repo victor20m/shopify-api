@@ -1,7 +1,10 @@
 using ShopifyApp.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
-Setup.SetupServices(builder.Services);
+Setup.SetupServices(builder.Services, builder.Configuration);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

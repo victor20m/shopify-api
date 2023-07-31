@@ -1,0 +1,2070 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShopifyApp",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Customers/redeem": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRedeemModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRedeemModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRedeemModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftCard"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftCard"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftCard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Customers/points/{customerId}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailablePointsModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailablePointsModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailablePointsModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Orders": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Address1": {
+            "type": "string",
+            "nullable": true
+          },
+          "Address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Company": {
+            "type": "string",
+            "nullable": true
+          },
+          "Country": {
+            "type": "string",
+            "nullable": true
+          },
+          "CountryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "CountryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Default": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "FirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "Province": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProvinceCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Zip": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailablePointsModel": {
+        "type": "object",
+        "properties": {
+          "CustomerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "AvailablePoints": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientDetails": {
+        "type": "object",
+        "properties": {
+          "AcceptLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "BrowserHeight": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "BrowserIp": {
+            "type": "string",
+            "nullable": true
+          },
+          "BrowserWidth": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "SessionHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserAgent": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CurrencyExchangeAdjustment": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Adjustment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "OriginalAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "FinalAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            },
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "DefaultAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true
+          },
+          "FirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "MultipassIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastOrderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "LastOrderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrdersCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "State": {
+            "type": "string",
+            "nullable": true
+          },
+          "Tags": {
+            "type": "string",
+            "nullable": true
+          },
+          "TaxExempt": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "TaxExemptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "TotalSpent": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "VerifiedEmail": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "SmsMarketingConsent": {
+            "$ref": "#/components/schemas/CustomerSmsMarketingConsent"
+          },
+          "Metafields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetaField"
+            },
+            "nullable": true
+          },
+          "EmailMarketingConsent": {
+            "$ref": "#/components/schemas/CustomerEmailMarketingConsent"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerEmailMarketingConsent": {
+        "type": "object",
+        "properties": {
+          "State": {
+            "type": "string",
+            "nullable": true
+          },
+          "OptInLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "ConsentUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerRedeemModel": {
+        "required": [
+          "CustomerId",
+          "Points"
+        ],
+        "type": "object",
+        "properties": {
+          "CustomerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Points": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerSmsMarketingConsent": {
+        "type": "object",
+        "properties": {
+          "State": {
+            "type": "string",
+            "nullable": true
+          },
+          "OptInLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "ConsentUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ConsentCollectedFrom": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiscountAllocation": {
+        "type": "object",
+        "properties": {
+          "Amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "DiscountApplicationIndex": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "AmountSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiscountApplication": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "ValueType": {
+            "type": "string",
+            "nullable": true
+          },
+          "AllocationMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "TargetSelection": {
+            "type": "string",
+            "nullable": true
+          },
+          "TargetType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiscountCode": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Fulfillment": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "LineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItem"
+            },
+            "nullable": true
+          },
+          "OrderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Receipt": {
+            "nullable": true
+          },
+          "Status": {
+            "type": "string",
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true
+          },
+          "NotifyCustomer": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Destination": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "TrackingCompany": {
+            "type": "string",
+            "nullable": true
+          },
+          "TrackingNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "TrackingNumbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "TrackingUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "TrackingUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "VariantInventoryManagement": {
+            "type": "string",
+            "nullable": true
+          },
+          "Service": {
+            "type": "string",
+            "nullable": true
+          },
+          "ShipmentStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "OriginAddress": {
+            "$ref": "#/components/schemas/FulfillmentOriginAddress"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FulfillmentOriginAddress": {
+        "type": "object",
+        "properties": {
+          "Address1": {
+            "type": "string",
+            "nullable": true
+          },
+          "Address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "CountryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProvinceCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Zip": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GiftCard": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Balance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "InitialValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DisabledAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ExpiresOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "LineItemId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "ApiClientId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "CustomerId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true
+          },
+          "TemplateSuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastCharacters": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineItem": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "FulfillableQuantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "FulfillmentService": {
+            "type": "string",
+            "nullable": true
+          },
+          "FulfillmentStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "Grams": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ProductId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Quantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "RequiresShipping": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "SKU": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "VariantId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "VariantTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Vendor": {
+            "type": "string",
+            "nullable": true
+          },
+          "GiftCard": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Taxable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "TaxLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxLine"
+            },
+            "nullable": true
+          },
+          "TipPaymentGateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "TipPaymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "TipPaymentGatewaySpecified": {
+            "type": "boolean"
+          },
+          "TotalDiscount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalDiscountSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "DiscountAllocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountAllocation"
+            },
+            "nullable": true
+          },
+          "Properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemProperty"
+            },
+            "nullable": true
+          },
+          "VariantInventoryManagement": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProductExists": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "PriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "PreTaxPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "PreTaxPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "Duties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemDuty"
+            },
+            "nullable": true
+          },
+          "FulfillmentLineItemId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AttributedStaffs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemAttributedStaff"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineItemAttributedStaff": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "Quantity": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineItemDuty": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "HarmonizedSystemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "CountryCodeOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "PriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TaxLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxLine"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineItemProperty": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "nullable": true
+          },
+          "Value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetaField": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Key": {
+            "type": "string",
+            "nullable": true
+          },
+          "Value": {
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Namespace": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "OwnerId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "OwnerResource": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NoteAttribute": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "AppId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "BillingAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "BrowserIp": {
+            "type": "string",
+            "nullable": true
+          },
+          "BuyerAcceptsMarketing": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CancelReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "CancelledAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CartToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "CheckoutToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "CheckoutId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "ClientDetails": {
+            "$ref": "#/components/schemas/ClientDetails"
+          },
+          "ClosedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Confirmed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "Customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "CustomerLocale": {
+            "type": "string",
+            "nullable": true
+          },
+          "DeviceId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "DiscountCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountCode"
+            },
+            "nullable": true
+          },
+          "DiscountApplications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountApplication"
+            },
+            "nullable": true
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true
+          },
+          "FinancialStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "Fulfillments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Fulfillment"
+            },
+            "nullable": true
+          },
+          "FulfillmentStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "Phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "Tags": {
+            "type": "string",
+            "nullable": true
+          },
+          "LandingSite": {
+            "type": "string",
+            "nullable": true
+          },
+          "LineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItem"
+            },
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true
+          },
+          "NoteAttributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NoteAttribute"
+            },
+            "nullable": true
+          },
+          "Number": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "OrderNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "OrderStatusUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "PaymentGatewayNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "ProcessedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ProcessingMethod": {
+            "type": "string",
+            "nullable": true,
+            "deprecated": true
+          },
+          "ReferringSite": {
+            "type": "string",
+            "nullable": true
+          },
+          "Refunds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Refund"
+            },
+            "nullable": true
+          },
+          "ShippingAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "ShippingLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShippingLine"
+            },
+            "nullable": true
+          },
+          "SourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "SubtotalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TaxLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxLine"
+            },
+            "nullable": true
+          },
+          "TaxesIncluded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Test": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Token": {
+            "type": "string",
+            "nullable": true
+          },
+          "TotalDiscounts": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalLineItemsPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalTipReceived": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalTax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalWeight": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            },
+            "nullable": true
+          },
+          "Metafields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetaField"
+            },
+            "nullable": true
+          },
+          "CurrentTotalDutiesSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "OriginalTotalDutiesSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "PresentmentCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "TotalLineItemsPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TotalDiscountsSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TotalShippingPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "SubtotalPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TotalPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TotalOutstanding": {
+            "type": "string",
+            "nullable": true
+          },
+          "TotalTaxSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "EstimatedTaxes": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CurrentSubtotalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CurrentSubtotalPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "CurrentTotalDiscounts": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CurrentTotalDiscountsSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "CurrentTotalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CurrentTotalPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "CurrentTotalTax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CurrentTotalTaxSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "PaymentTerms": {
+            "$ref": "#/components/schemas/PaymentTerms"
+          },
+          "CurrentTotalAdditionalFeesSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "OriginalTotalAdditionalFeesSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "PoNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "TaxExempt": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Company": {
+            "$ref": "#/components/schemas/OrderCompany"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderCompany": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentDetails": {
+        "type": "object",
+        "properties": {
+          "AvsResultCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreditCardBin": {
+            "type": "string",
+            "nullable": true
+          },
+          "CvvResultCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreditCardNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreditCardCompany": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreditCardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreditCardWallet": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreditCardExpirationMonth": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "CreditCardExpirationYear": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentSchedule": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "IssuedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DueAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CompletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ExpectedPaymentMethod": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentTerms": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "DueInDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "PaymentTermsName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PaymentTermsType": {
+            "type": "string",
+            "nullable": true
+          },
+          "PaymentSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentSchedule"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Price": {
+        "type": "object",
+        "properties": {
+          "CurrencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PriceSet": {
+        "type": "object",
+        "properties": {
+          "ShopMoney": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "PresentmentMoney": {
+            "$ref": "#/components/schemas/Price"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Refund": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Notify": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Shipping": {
+            "$ref": "#/components/schemas/Shipping"
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderAdjustments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RefundOrderAdjustment"
+            },
+            "nullable": true
+          },
+          "ProcessedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true
+          },
+          "DiscrepancyReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "RefundLineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RefundLineItem"
+            },
+            "nullable": true
+          },
+          "Transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            },
+            "nullable": true
+          },
+          "UserId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Duties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RefundDuty"
+            },
+            "nullable": true
+          },
+          "RefundDuties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RefundDutyType"
+            },
+            "nullable": true
+          },
+          "Return": {
+            "$ref": "#/components/schemas/Return"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefundDuty": {
+        "type": "object",
+        "properties": {
+          "DutyId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AmountSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefundDutyType": {
+        "type": "object",
+        "properties": {
+          "DutyId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "RefundType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefundLineItem": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "LineItem": {
+            "$ref": "#/components/schemas/LineItem"
+          },
+          "LineItemId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Quantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "TotalTax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "SubTotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "SubTotalTaxSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TotalTaxSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "RestockType": {
+            "type": "string",
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefundOrderAdjustment": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "RefundId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "TaxAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Kind": {
+            "type": "string",
+            "nullable": true
+          },
+          "Reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "AmountSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "TaxAmountSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Return": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Shipping": {
+        "type": "object",
+        "properties": {
+          "FullRefund": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "MaximumRefundable": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShippingLine": {
+        "type": "object",
+        "properties": {
+          "CarrierIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "Price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DiscountedPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DiscountAllocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountAllocation"
+            },
+            "nullable": true
+          },
+          "Source": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "TaxLines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxLine"
+            },
+            "nullable": true
+          },
+          "PriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          },
+          "DiscountedPriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxLine": {
+        "type": "object",
+        "properties": {
+          "Price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Rate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "PriceSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "AdminGraphQLAPIId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Authorization": {
+            "type": "string",
+            "nullable": true
+          },
+          "AuthorizationExpiresAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DeviceId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "SourceName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Source": {
+            "type": "string",
+            "nullable": true
+          },
+          "PaymentDetails": {
+            "$ref": "#/components/schemas/PaymentDetails"
+          },
+          "Kind": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Receipt": {
+            "nullable": true
+          },
+          "ErrorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "string",
+            "nullable": true
+          },
+          "Test": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "ParentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "ProcessedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "MaximumRefundable": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CurrencyExchangeAdjustment": {
+            "$ref": "#/components/schemas/CurrencyExchangeAdjustment"
+          },
+          "PaymentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "TotalUnsettledSet": {
+            "$ref": "#/components/schemas/PriceSet"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

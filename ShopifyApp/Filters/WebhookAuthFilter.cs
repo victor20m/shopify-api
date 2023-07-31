@@ -14,19 +14,26 @@ namespace ShopifyApp.Filters
         }
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            string shopifySecretKey = _config["shopify:client_secret"];
             var requestBody = context.HttpContext.Request.Body;
             var requestHeaders = context.HttpContext.Request.Headers;
 
 
-            //TODO: AuthorizationService.IsAuthenticWebhook -> can't make this work with aspnet core following docs, need to implement another way
+            //AuthorizationService.IsAuthenticWebhook -> can't make this work with aspnet core following docs, needed to implement another way
             try
             {
-                bool isValidRequest = await IsAuthenticWebhook(requestHeaders, requestBody, shopifySecretKey);
-
-                if (!isValidRequest)
+                string shopifySecretKey = _config["shopify:client_secret"];
+                if (_config is null || shopifySecretKey is null)
                 {
-                    context.Result = GetContentResult(403, "Access forbidden, request is not coming from Shopify.");
+                    context.Result = GetContentResult(500, "Error retrieving store configuration.");
+                }
+                else
+                {
+                    bool isValidRequest = await IsAuthenticWebhook(requestHeaders, requestBody, shopifySecretKey);
+
+                    if (!isValidRequest)
+                    {
+                        context.Result = GetContentResult(403, "Access forbidden, request is not coming from Shopify.");
+                    }
                 }
             }
             catch (Exception)
